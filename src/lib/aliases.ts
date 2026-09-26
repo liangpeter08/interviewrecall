@@ -1,0 +1,21 @@
+/** Curated synonym groups. Keys and values are matched after normalization. */
+export const aliases: Record<string, string[]> = {
+  "priority queue": ["heap", "heapq"],
+  "hash map": ["dict", "dictionary"],
+  hashmap: ["dict", "dictionary"],
+  "hash set": ["set"],
+  queue: ["deque", "popleft"],
+  "lower bound": ["bisect_left", "first greater or equal"],
+  "upper bound": ["bisect_right", "first greater"],
+  "custom comparator": ["cmp_to_key", "custom sort"],
+  comparator: ["cmp_to_key"],
+  constructor: ["__init__", "init"],
+  regex: ["re", "regular expression", "pattern match"],
+  regexp: ["regex"],
+  memo: ["memoization", "cache"],
+  dp: ["dynamic programming"],
+  ternary: ["conditional expression"],
+  switch: ["match"],
+  "array list": ["list"],
+  array: ["list"],
+};
