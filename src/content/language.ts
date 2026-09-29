@@ -113,4 +113,65 @@ lo = -math.inf`,
     related: ["truthiness-identity"],
     documentationUrl: `${docs}/library/stdtypes.html#numeric-types-int-float-complex`,
   },
+  {
+    id: "stdin-io",
+    title: "Reading standard input and printing output",
+    summary: "input() for a line, sys.stdin for fast bulk reads, print() with sep/end for output.",
+    category: "language",
+    keywords: ["stdin", "stdout", "input", "print", "sys.stdin", "readline", "fast io", "read input", "competitive programming", "standard io", "eof"],
+    syntax: `import sys
+
+n = int(input())                        # one line, newline stripped
+a, b = map(int, input().split())
+nums = list(map(int, input().split()))
+
+input = sys.stdin.readline              # faster; keeps trailing "\\n"
+line = input().rstrip("\\n")
+
+data = sys.stdin.read().split()         # all tokens at once
+it = iter(data); n = int(next(it))
+
+for line in sys.stdin:                  # until EOF
+    process(line.rstrip("\\n"))
+
+print(*nums)                            # space-separated
+print(a, b, sep=",", end="")
+sys.stdout.write("\\n".join(map(str, nums)) + "\\n")`,
+    complexity: ["Many print() calls are slow — join once and write"],
+    warning: "input() raises EOFError at end of input; sys.stdin.readline() returns \"\" instead and keeps the newline.",
+    related: ["file-io", "string-split-join"],
+    documentationUrl: `${docs}/library/sys.html#sys.stdin`,
+    recallPrompt: "Read n, then a line of n integers from stdin, and print them space-separated.",
+  },
+  {
+    id: "file-io",
+    title: "Reading and writing files",
+    summary: "open() inside a with block; iterate lines, read all, or write; pathlib for quick one-liners.",
+    category: "language",
+    keywords: ["file", "open", "read file", "write file", "with open", "readlines", "pathlib", "csv", "json", "encoding", "append"],
+    syntax: `with open("in.txt", encoding="utf-8") as f:
+    for line in f:                      # lazy, line by line
+        row = line.rstrip("\\n")
+
+with open("in.txt") as f:
+    text = f.read()                     # whole file as str
+    # lines = f.read().splitlines()
+
+with open("out.txt", "w") as f:         # "a" append, "rb"/"wb" binary
+    f.write("hello\\n")
+    print(x, y, file=f)
+
+from pathlib import Path
+text = Path("in.txt").read_text()
+Path("out.txt").write_text(text)
+
+import json, csv
+data = json.load(open("d.json"))
+with open("d.csv", newline="") as f:
+    rows = list(csv.reader(f))`,
+    warning: "\"w\" truncates the file immediately; f.write does not add a newline; lines from iteration keep \"\\n\".",
+    related: ["stdin-io", "exceptions-context"],
+    documentationUrl: `${docs}/tutorial/inputoutput.html#reading-and-writing-files`,
+    recallPrompt: "Read a text file line by line and write the reversed lines to another file.",
+  },
 ];
